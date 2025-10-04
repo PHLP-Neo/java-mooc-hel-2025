@@ -25,6 +25,16 @@ public class StoringRecords {
 
         // Write here the code for reading from file
         // and printing the read records
+        try ( Scanner filecontent = new Scanner(Paths.get(file))) {
+            while (filecontent.hasNext()) {
+                String next = filecontent.next();
+                String name = next.split(",")[0];
+                int age = Integer.valueOf(next.split(",")[1]);
+                persons.add(new Person(name, age));
+            }
+        } catch (Exception e) {
+            System.out.println("Reading the file " + file + " failed.");
+        }
         return persons;
 
     }
